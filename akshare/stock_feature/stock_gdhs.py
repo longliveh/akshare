@@ -121,7 +121,7 @@ def stock_zh_a_gdhs_detail_em(symbol: str = "000002") -> pd.DataFrame:
     :return: 股东户数
     :rtype: pandas.DataFrame
     """
-    url = "https://datacenter-web.eastmoney.com/api/data/v1/get"
+    url = "http://datacenter-web.eastmoney.com/api/data/v1/get"
     params = {
         'sortColumns': 'END_DATE',
         'sortTypes': '-1',
@@ -201,8 +201,8 @@ def stock_zh_a_gdhs_detail_em(symbol: str = "000002") -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    stock_zh_a_gdhs_df = stock_zh_a_gdhs()
-    print(stock_zh_a_gdhs_df)
+    # stock_zh_a_gdhs_df = stock_zh_a_gdhs(symbol="20210331")
+    # print(stock_zh_a_gdhs_df)
 
-    stock_zh_a_gdhs_detail_em_df = stock_zh_a_gdhs_detail_em(symbol="000002")
+    stock_zh_a_gdhs_detail_em_df = stock_zh_a_gdhs_detail_em(symbol="600905")
     print(stock_zh_a_gdhs_detail_em_df)
