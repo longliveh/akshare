@@ -136,6 +136,8 @@ def stock_zh_a_gdhs_detail_em(symbol: str = "000002") -> pd.DataFrame:
     }
     r = requests.get(url, params=params)
     data_json = r.json()
+    if data_json['code'] != 0:
+        return None
     total_page_num = data_json["result"]["pages"]
     big_df = pd.DataFrame()
     for page_num in tqdm(range(1, total_page_num + 1), leave=False):
@@ -204,5 +206,5 @@ if __name__ == "__main__":
     # stock_zh_a_gdhs_df = stock_zh_a_gdhs(symbol="20210331")
     # print(stock_zh_a_gdhs_df)
 
-    stock_zh_a_gdhs_detail_em_df = stock_zh_a_gdhs_detail_em(symbol="600905")
+    stock_zh_a_gdhs_detail_em_df = stock_zh_a_gdhs_detail_em(symbol="000001")
     print(stock_zh_a_gdhs_detail_em_df)
