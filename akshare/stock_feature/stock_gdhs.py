@@ -206,5 +206,5 @@ if __name__ == "__main__":
     # stock_zh_a_gdhs_df = stock_zh_a_gdhs(symbol="20210331")
     # print(stock_zh_a_gdhs_df)
 
-    stock_zh_a_gdhs_detail_em_df = stock_zh_a_gdhs_detail_em(symbol="000001")
+    stock_zh_a_gdhs_detail_em_df = stock_zh_a_gdhs_detail_em(symbol="002746")
     print(stock_zh_a_gdhs_detail_em_df)

@@ -10,7 +10,7 @@ from akshare.stock import stock_info
 
 def deal() -> dict:
     all_stocks = stock_info.stock_info_a_code_name()
-    l = list(range(0, 4530, 500))
+    l = list(range(0, 5001, 500))
     for i in range(l.__len__()):
         segment = all_stocks[l[i]:l[i + 1]]
         print(str(l[i]), str(l[i + 1]))
@@ -32,11 +32,36 @@ def saveData(var, filename):
         pickle.dump(var, file, True)
 
 
-def loadData() -> dict:
-    with open("data.pkl", "rb") as file:
-        return pickle.load(file, True)
+def loadData(filename) -> dict:
+    with open(filename, "rb") as file:
+        return pickle.load(file)
+
+
+def analysis():
+    l = list(range(500, 5001, 500))
+    dict = {}
+    for i in range(l.__len__()):
+        dict = {**dict,**loadData("gdhs_" + str(l[i]) + ".pkl")}
+    good = {}
+    for key in dict:
+        df = dict[key]
+        if df is not None:
+            segment = df[['股东户数统计截止日', '代码','名称', '股东户数-本次','户均持股市值', '股东户数-上次', '股东户数-增减', '股东户数-增减比例', '户均持股数量', '区间涨跌幅', '总市值', '总股本', '股本变动', '股本变动原因', '股东户数公告日期']]
+            count = 0
+            for index, row in segment.iterrows():
+                gdhs_zj = row['股东户数-增减']
+                gdhz_zjp = row['股东户数-增减比例']
+                if gdhz_zjp > 0:
+                    break
+                if gdhz_zjp < -10:
+                    count += 1
+            if count >= 4:
+                good[key] = segment
+    for key in good:
+        print(key)
 
 
 if __name__ == '__main__':
-    data = deal()
-    saveData(data)
+    # data = deal()
+    # saveData(data)
+    analysis()
