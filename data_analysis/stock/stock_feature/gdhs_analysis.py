@@ -55,9 +55,10 @@ def analysis():
                     break
                 if gdhz_zjp < -10:
                     count += 1
-            if count >= 4:
+            if count >= 4 and (segment[0:1]["户均持股市值"][0] > 200000):
                 good[key] = segment
     for key in good:
+        t = good[key]
         print(key)
 
 
